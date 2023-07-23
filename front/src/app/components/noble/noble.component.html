@@ -1,0 +1,131 @@
+<div class="workarea">
+  <form [formGroup]="nobleForm" (submit)="submit()">
+
+    <mat-form-field class="nameinputsize">
+      <mat-label>Name</mat-label>
+      <input matInput placeholder="Placeholder" formControlName="name" required>
+      <mat-error *ngIf="nobleForm.controls.name.touched && nobleForm.controls.name.invalid">
+        <span *ngIf="nobleForm.controls.name.hasError('required')">This field is required.</span>
+      </mat-error>
+    </mat-form-field>
+
+    <mat-divider class="dividerspacing"></mat-divider>
+
+    <mat-form-field class="fullnameinputsize">
+      <mat-label>Full name</mat-label>
+      <input matInput placeholder="Placeholder" formControlName="fullName" required>
+      <mat-error *ngIf="nobleForm.controls.fullName.touched && nobleForm.controls.fullName.invalid">
+        <span *ngIf="nobleForm.controls.fullName.hasError('required')">This field is required.</span>
+      </mat-error>
+    </mat-form-field>
+
+    <mat-divider></mat-divider>
+
+    <mat-label>Gender</mat-label>
+      <mat-radio-group aria-label="Gender" formControlName="gender" >
+        <mat-radio-button value="{{(enumGender.MALE).toString()}}">Male</mat-radio-button>
+        <mat-radio-button value="{{(enumGender.FEMALE).toString()}}">Female</mat-radio-button>
+      </mat-radio-group>
+      <mat-error *ngIf="nobleForm.controls.gender.touched && nobleForm.controls.gender.invalid">
+        <span *ngIf="nobleForm.controls.gender.hasError('required')">This field is required.</span>
+      </mat-error>
+
+    <mat-divider></mat-divider>
+
+    <mat-form-field class="nameinputsize" appearance="fill">
+      <mat-label>Born</mat-label>
+      <input matInput [matDatepicker]="bornPicker" formControlName="born" required>
+      <mat-hint class="hintfontcolor">MM/DD/YYYY</mat-hint>
+      <mat-datepicker-toggle matIconSuffix [for]="bornPicker"></mat-datepicker-toggle>
+      <mat-datepicker #bornPicker startView="multi-year"></mat-datepicker>
+    </mat-form-field>
+
+    <mat-divider></mat-divider>
+
+    <mat-form-field class="nameinputsize" appearance="fill">
+      <mat-label>Death</mat-label>
+      <input matInput [matDatepicker]="deathPicker" formControlName="death" required>
+      <mat-hint class="hintfontcolor" >MM/DD/YYYY</mat-hint>
+      <mat-datepicker-toggle matIconSuffix [for]="deathPicker"></mat-datepicker-toggle>
+      <mat-datepicker #deathPicker startView="multi-year"></mat-datepicker>
+    </mat-form-field>
+
+    <mat-divider></mat-divider>
+
+    <mat-form-field class="nameinputsize" appearance="fill">
+      <mat-label>Mother</mat-label>
+      <input type="text"
+            placeholder="Who is my mom?"
+            aria-label="Mother"
+            matInput
+            formControlName="mom"
+            [matAutocomplete]="autoMom">
+      <mat-autocomplete #autoMom="matAutocomplete" [displayWith]="getNobleName">
+        <mat-option *ngFor="let noble of ladies" [value]="noble">
+          {{noble?.name}}
+        </mat-option>
+      </mat-autocomplete>
+    </mat-form-field>
+
+
+    <mat-divider></mat-divider>
+
+    <mat-form-field class="nameinputsize" appearance="fill">
+      <mat-label>Father</mat-label>
+      <input type="text"
+            placeholder="Who is my dad?"
+            aria-label="Father"
+            matInput
+            formControlName="dad"
+            [matAutocomplete]="autoDad">
+      <mat-autocomplete #autoDad="matAutocomplete" [displayWith]="getNobleName">
+        <mat-option *ngFor="let noble of gentlemen" [value]="noble">
+          {{noble?.name}}
+        </mat-option>
+      </mat-autocomplete>
+    </mat-form-field>
+
+    <mat-divider></mat-divider>
+
+    <mat-form-field class="fullnameinputsize" appearance="fill">
+      <mat-label>Descendents</mat-label>
+      <mat-chip-grid #chipDescendentsGrid aria-label="Descendents">
+        <mat-chip-row *ngFor="let child of descendents" [editable]="false">
+          <fa-icon class="gendericon gendericonmale" *ngIf="child.gender == enumGender.MALE" [icon]="faMars"></fa-icon>
+          <fa-icon class="gendericon gendericonfemale" *ngIf="child.gender == enumGender.FEMALE" [icon]="faVenus"></fa-icon>
+          {{child.name}}
+        </mat-chip-row>
+        <mat-chip-row *ngIf="descendents.length == 0" [editable]="false" disabled><i>no records</i></mat-chip-row>
+        <input readonly [matChipInputFor]="chipDescendentsGrid"/>
+      </mat-chip-grid>
+    </mat-form-field>
+
+
+    <div class="reignedcontainer">
+      <div class="reignedlabel">Reigned</div>
+      <div class="reigncardslist">
+        <div *ngFor="let reign of nobleForm.controls.reigned.value index as i" >
+          <app-reigncard
+            [reign]="reign"
+            (deleteReign)="deleteReign(i)"
+            (reignChange)="updateReigns($event, i)"
+            (errorDetected)="setReignError($event, i)"></app-reigncard>
+        </div>
+        <div>
+          <mat-card class="reigncard">
+            <button class="newbutton" type="button" mat-button (click)="newReign()">New</button>
+          </mat-card>
+        </div>
+      </div>
+    </div>
+
+
+
+    <section>
+      <div class="example-button-row">
+        <button mat-stroked-button routerLink="/nobles">Cancel</button>
+        <button mat-stroked-button color="primary" type="submit" [disabled]="disableSaveButton()">Save</button>
+      </div>
+    </section>
+  </form>
+</div>

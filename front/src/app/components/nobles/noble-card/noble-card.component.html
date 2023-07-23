@@ -1,0 +1,70 @@
+<div class="card noblecard" (click)="clicked()">
+  <div class="card-header">
+    <h1 class="card-title noblename"><span>{{noble.name}} </span><span class="noblelifetime">({{getLifeTime(noble)}})</span></h1>
+    <h3 class="card-subtitle noblefullname">{{noble.fullName}}</h3>
+  </div>
+  <div class="card-body">
+    <div class="card-text noblecardcontent">
+
+      <div *ngIf="noble.ascendents.length > 0">
+        <div class="parentstitle"> Parents:</div>
+        <div class="parentitem" *ngIf="getParentName(noble, 'FEMALE')">
+          <fa-icon class="gendericon gendericonfemale" [icon]="faVenus"></fa-icon>{{getParentName(noble, enumGender.FEMALE)}}
+        </div>
+        <div class="parentitem" *ngIf="getParentName(noble, 'MALE')">
+          <fa-icon class="gendericon gendericonmale" [icon]="faMars"></fa-icon>{{getParentName(noble, enumGender.MALE)}}
+        </div>
+      </div>
+
+      <div *ngIf="noble.reigned.length > 0" class="reignstitle">Reigns:</div>
+      <div *ngFor="let reign of noble.reigned" class="reignitem">
+        <div class="flagspace">
+          <span [className]="getCodeClass(reign.country.code)"></span>
+        </div>
+        {{reign.title}} ({{getReignTime(reign)}})
+      </div>
+
+    </div>
+  </div>
+
+  <div class="card-footer">
+    <button type="button" class="btn btn-outline-danger actionbuttons" (click)="delete($event)">
+      <fa-icon [icon]="faTrash"></fa-icon>
+    </button>
+  </div>
+
+</div>
+
+
+<!--mat-card class="noblecard" (click)="clicked()">
+  <mat-card-header>
+    <mat-card-title><span class="noblename">{{noble.name}} </span><span class="noblelifetime">({{getLifeTime(noble)}})</span></mat-card-title>
+    <mat-card-subtitle class="noblefullname">{{noble.fullName}}</mat-card-subtitle>
+  </mat-card-header>
+  <mat-card-content class="noblecardcontent">
+    <div *ngIf="noble.ascendents.length > 0">
+      <div class="parentstitle"> Parents:</div>
+      <div class="parentitem" *ngIf="getParentName(noble, 'FEMALE')">
+        <fa-icon class="gendericon gendericonfemale" [icon]="faVenus"></fa-icon>{{getParentName(noble, enumGender.FEMALE)}}
+      </div>
+      <div class="parentitem" *ngIf="getParentName(noble, 'MALE')">
+        <fa-icon class="gendericon gendericonmale" [icon]="faMars"></fa-icon>{{getParentName(noble, enumGender.MALE)}}
+      </div>
+    </div>
+
+    <div *ngIf="noble.reigned.length > 0" class="reignstitle">Reigns:</div>
+    <div *ngFor="let reign of noble.reigned" class="reignitem">
+      <span class="crownicon"><fa-icon [icon]="faCrown"></fa-icon></!--span>
+      <div class="flagspace">
+        <span [className]="getCodeClass(reign.country.code)"></span>
+      </div>
+      {{reign.title}} ({{getReignTime(reign)}})
+    </div>
+
+  </mat-card-content>
+  <mat-card-actions class="actionbuttons">
+    <button mat-button color="warn" (click)="delete($event)">
+      <fa-icon [icon]="faTrash"></fa-icon>
+    </button>
+  </mat-card-actions>
+</mat-card-->

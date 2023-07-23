@@ -1,0 +1,10 @@
+<!-- Modal Dialog to confirm a deletion -->
+<h1 mat-dialog-title>Confirmation</h1>
+<div mat-dialog-content>
+  <p>Confirm deletion of the noble <strong>{{nobleToDelete.name}}</strong>?</p>
+</div>
+<div mat-dialog-actions>
+  <button mat-button [mat-dialog-close]="-1" cdkFocusInitial>Oops, No!</button>
+  <button mat-button [mat-dialog-close]="nobleToDelete.id">OK, delete it.</button>
+</div>
+<!-- ------------------------ -->

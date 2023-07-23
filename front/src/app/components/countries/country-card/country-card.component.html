@@ -1,0 +1,15 @@
+<div class="card countrycard" (click)="clicked()">
+  <div class="card-body">
+    <h1 class="card-title countryname">
+      <span class="flagspace">
+        <span [className]="getCodeClass(country.code)"></span>
+      </span>
+      <span class="countryname">{{country.name}}</span>
+    </h1>
+  </div>
+  <div class="card-footer actionbuttons">
+    <button type="button" class="btn btn-outline-danger actionbuttons" (click)="delete($event)">
+      <fa-icon [icon]="faTrash"></fa-icon>
+    </button>
+  </div>
+</div>

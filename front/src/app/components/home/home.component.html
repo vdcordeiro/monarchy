@@ -1,0 +1,31 @@
+<div class="viewarea">
+
+  <nav class="navbar navbar-expand-sm bg-light">
+    <div class="container-fluid">
+      <div class="logo navbar-brand">
+        <fa-icon [icon]="faCrown"></fa-icon>
+      </div>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item menuitem">
+            <div class="nav-link" [class.active]="startWith('/noble')" (click)="setPanel('/nobles')" aria-current="page">Nobles</div>
+          </li>
+          <li class="nav-item menuitem">
+            <div class="nav-link" [class.active]="startWith('/countr')" (click)="setPanel('/countries')" aria-current="page">Countries</div>
+          </li>
+          <li class="nav-item menuitem">
+            <div class="nav-link" [class.active]="startWith('/kinship')" (click)="setPanel('/kinship')" aria-current="page">Kinship</div>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <router-outlet></router-outlet>
+
+</div>
+
+

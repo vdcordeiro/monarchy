@@ -1,0 +1,35 @@
+<form class="formconteiner" [formGroup]="countryForm" (submit)="submit()">
+  <div class="row">
+    <div class="col-lg-4 col-md-6 col-sm-12controlfield">
+      <label for="countryNameInput" class="form-label">Name</label>
+      <div class="input-group has-validation">
+        <input type="text" class="form-control" id="countryNameInput" placeholder="Country name" formControlName="name" required>
+        <div class="invalid-feedback">This field is required.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-lg-4 col-md-6 col-sm-12 controlfield">
+      <label for="countryCodeInput" class="form-label">Code</label>
+      <div class="input-group has-validation">
+        <input type="text" class="form-control" id="countryCodeInput" placeholder="ISO Code" formControlName="code" required>
+        <div class="flagspace">
+          <span [className]="getCodeClass()"></span>
+        </div>
+        <div class="invalid-feedback">This field is required.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-lg-4 col-md-6 col-sm-12 controlfield">
+      <div class="asctionbutton">
+        <button class="btn btn-outline-secondary" type="button" routerLink="/countries">Cancel</button>
+      </div>
+      <div class="actionbutton">
+        <button class="btn btn-outline-primary" type="submit">Save</button>
+      </div>
+    </div>
+  </div>
+</form>

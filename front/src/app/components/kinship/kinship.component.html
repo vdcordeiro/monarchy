@@ -1,0 +1,41 @@
+<div class="workspace">
+  <div class="row question">
+    <div class="col-12">What is the kinship?</div>
+  </div>
+  <div class="row">
+
+    <div class="col-lg-4 col-md-6 col-sm-12 form-floating">
+      <select class="form-select" id="nobleOne" aria-label="Floating label select example" (change)="getKinships()" [(ngModel)]="nobleOne">
+        <option *ngFor="let noble of nobles" [ngValue]="noble">{{noble.fullName}}</option>
+      </select>
+      <label for="nobleOne" class="form-label">What</label>
+    </div>
+
+    <div class="col-lg-4 col-md-6 col-sm-12 form-floating">
+      <select class="form-select" id="nobleTwo" aria-label="Floating label select example" (change)="getKinships()" [(ngModel)]="nobleTwo">
+        <option *ngFor="let noble of nobles" [ngValue]="noble">{{noble.fullName}}</option>
+      </select>
+      <label for="nobleTwo" class="form-label">is from</label>
+    </div>
+
+
+  </div>
+
+
+  <div class="kinshipscontainer">
+    <div class="row kinshiprow" *ngFor="let kinship of kinships">
+      <div class="col-12" *ngIf="getKinshipType(kinship) == 'same'">
+        {{nobleOne.name}} and {{nobleTwo.name}} are the same person.
+      </div>
+      <div class="col-12" *ngIf="getKinshipType(kinship) == 'some'">
+          {{nobleOne.name}} is <strong>{{kinship | lowercase }}</strong> of {{nobleTwo.name}}
+      </div>
+      <div class="col-12" *ngIf="getKinshipType(kinship) == 'none'">
+          {{nobleOne.name}} has <strong>{{kinship | lowercase }}</strong> to {{nobleTwo.name}}
+      </div>
+    </div>
+  </div>
+
+</div>
+
+

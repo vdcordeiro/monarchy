@@ -1,0 +1,59 @@
+  <mat-card class="reigncard" >
+    <form [formGroup]="reignForm">
+
+      <mat-form-field class="reigninput" appearance="fill">
+        <mat-label>Country</mat-label>
+        <input type="text"
+              placeholder="Which country?"
+              aria-label="Country"
+              matInput
+              formControlName="country"
+              [matAutocomplete]="countryAuto" >
+        <mat-autocomplete #countryAuto="matAutocomplete" [displayWith]="getCountryName" (optionSelected)="update()">
+          <mat-option *ngFor="let country of countries" [value]="country">
+            {{country?.name}}
+          </mat-option>
+        </mat-autocomplete>
+      </mat-form-field>
+
+      <mat-divider></mat-divider>
+
+      <mat-form-field class="reigninput" appearance="fill">
+        <mat-label>Title</mat-label>
+        <input type="text"
+              placeholder="Title"
+              aria-label="Title"
+              matInput
+              required
+              (change)="update()"
+              formControlName="title">
+      </mat-form-field>
+
+      <mat-divider></mat-divider>
+
+      <mat-form-field class="reigninput" appearance="fill">
+        <mat-label>From</mat-label>
+        <input matInput [matDatepicker]="fromPicker" formControlName="from" (dateChange)="update()" required>
+        <mat-hint class="hintfontcolor">MM/DD/YYYY</mat-hint>
+        <mat-datepicker-toggle matIconSuffix [for]="fromPicker"></mat-datepicker-toggle>
+        <mat-datepicker #fromPicker startView="multi-year"></mat-datepicker>
+      </mat-form-field>
+
+      <mat-divider></mat-divider>
+
+      <mat-form-field class="reigninput" appearance="fill">
+        <mat-label>To</mat-label>
+        <input matInput [matDatepicker]="toPicker" formControlName="to" (dateChange)="update()" required>
+        <mat-hint class="hintfontcolor">MM/DD/YYYY</mat-hint>
+        <mat-datepicker-toggle matIconSuffix [for]="toPicker"></mat-datepicker-toggle>
+        <mat-datepicker #toPicker startView="multi-year"></mat-datepicker>
+      </mat-form-field>
+
+      <mat-divider></mat-divider>
+
+      <mat-card-actions>
+        <button mat-button type="button" (click)="delete()">Delete</button>
+      </mat-card-actions>
+
+    </form>
+  </mat-card>

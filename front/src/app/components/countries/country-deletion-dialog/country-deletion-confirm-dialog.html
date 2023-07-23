@@ -1,0 +1,10 @@
+<!-- Modal Dialog to confirm a deletion -->
+<h1 mat-dialog-title>Confirmation</h1>
+<div mat-dialog-content>
+  <p>Confirm deletion of the conutry {{countryToDelete.name}}?</p>
+</div>
+<div mat-dialog-actions>
+  <button mat-button [mat-dialog-close]="-1" cdkFocusInitial>Oops, No!</button>
+  <button mat-button [mat-dialog-close]="countryToDelete.id">OK, delete it.</button>
+</div>
+<!-- ------------------------ -->

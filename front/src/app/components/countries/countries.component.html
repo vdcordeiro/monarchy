@@ -1,0 +1,20 @@
+<div class="workarea">
+  <section>
+      <div class="button-row">
+        <button class="btn btn-outline-primary" routerLink="/country/-1">New Country</button>
+      </div>
+  </section>
+
+  <div class="text-left">
+    <div class="row">
+      <div *ngFor="let country of countries" class="col-sm-12 col-md-6 col-lg-4 col-xxl-3">
+        <div class="countrycard">
+          <app-country-card [country]="country" (countryClicked)="goToEditCountry(country.id)" (deleteCountry)="openDialog($event, country)"></app-country-card>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div *ngIf="error !== ''">{{error}}</div>
+
+</div>
