@@ -1,2 +1,0 @@
-# monarchy
-Monarchy Application
